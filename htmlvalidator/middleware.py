@@ -20,6 +20,9 @@ class HTMLValidator(object):
         if not getattr(settings, 'HTMLVALIDATOR_ENABLED', False):
             return response
 
+        if request.path.startswith('/__debug__/'):
+            return response
+
         if (
             response.status_code == 200 and (
                 response['content-type'].startswith('text/html') or
